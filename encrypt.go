@@ -39,6 +39,7 @@ func (s *AesEncrypt) AESEncrypt(plaintext string) string {
 	}
 	ecb := cipher.NewCBCEncrypter(block, []byte(s.Iv))
 	content := utils.PKCS5Padding([]byte(plaintext), block.BlockSize())
+
 	crypted := make([]byte, len(content))
 	ecb.CryptBlocks(crypted, content)
 
@@ -47,10 +48,12 @@ func (s *AesEncrypt) AESEncrypt(plaintext string) string {
 }
 
 func (s *AesEncrypt) AESDecrypt(encrypted string) []byte {
+	// decode encrypted data
 	encryptedData, err := base64.StdEncoding.DecodeString(encrypted)
 	if err != nil {
 		log.Fatal(fmt.Printf("Error: %s \n", "unable to decode encrypted data"))
 	}
+	// block chiper
 	block, err := aes.NewCipher([]byte(s.Secret))
 	if err != nil {
 		log.Fatal(fmt.Printf("Error: %#v \n", err))
@@ -59,8 +62,10 @@ func (s *AesEncrypt) AESDecrypt(encrypted string) []byte {
 		log.Fatal(fmt.Printf("Error: %s \n", "encrypted data is empty"))
 	}
 	ecb := cipher.NewCBCDecrypter(block, []byte(s.Iv))
+
 	decrypted := make([]byte, len(encryptedData))
 	ecb.CryptBlocks(decrypted, encryptedData)
 
+	// return as string
 	return utils.PKCS5Trimming(decrypted)
 }
