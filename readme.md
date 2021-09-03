@@ -1,14 +1,14 @@
 Crowde Aes-Cbc-256 golang SDK
 
 ## How to install
-```$ go get https://github.com/crowdeco/aes-cbc-256```
+```$ go get github.com/crowdeco/crowdeAesCbc256```
 
 ## How to use
 ```
    package main
    
    import (
-   	"crowdeAesCbc256 github.com/crowdeco/aes-cbc-256"
+   	"github.com/crowdeco/crowdeAesCbc256"
    	"fmt"
    )
    
