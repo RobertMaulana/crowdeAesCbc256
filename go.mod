@@ -1,3 +1,3 @@
-module aes-cbc-256
+module github.com/crowdeco/aes-cbc-256
 
-go 1.15
+go 1.16
