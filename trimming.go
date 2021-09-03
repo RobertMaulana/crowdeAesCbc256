@@ -1,4 +1,4 @@
-package utils
+package crowdeAesCbc256
 
 func PKCS5Trimming(encrypt []byte) []byte {
 	padding := encrypt[len(encrypt)-1]

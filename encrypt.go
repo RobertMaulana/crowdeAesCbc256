@@ -1,7 +1,6 @@
 package crowdeAesCbc256
 
 import (
-	"crowdeAesCbc256/utils"
 	"crypto/aes"
 	"crypto/cipher"
 	"encoding/base64"
@@ -38,7 +37,7 @@ func (s *AesEncrypt) AESEncrypt(plaintext string) string {
 		log.Fatal(fmt.Printf("Error: %s \n", "plaintext is empty"))
 	}
 	ecb := cipher.NewCBCEncrypter(block, []byte(s.Iv))
-	content := utils.PKCS5Padding([]byte(plaintext), block.BlockSize())
+	content := PKCS5Padding([]byte(plaintext), block.BlockSize())
 
 	crypted := make([]byte, len(content))
 	ecb.CryptBlocks(crypted, content)
@@ -67,5 +66,5 @@ func (s *AesEncrypt) AESDecrypt(encrypted string) []byte {
 	ecb.CryptBlocks(decrypted, encryptedData)
 
 	// return as string
-	return utils.PKCS5Trimming(decrypted)
+	return PKCS5Trimming(decrypted)
 }
